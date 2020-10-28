@@ -1,6 +1,6 @@
 ﻿namespace CadastroProdutos
 {
-    partial class Form1
+    partial class frmProdutos
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -32,14 +32,14 @@
             this.lblPreco = new System.Windows.Forms.Label();
             this.lblNome = new System.Windows.Forms.Label();
             this.txtCodProduto = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtNome = new System.Windows.Forms.TextBox();
+            this.txtPreco = new System.Windows.Forms.TextBox();
             this.lblQuantidade = new System.Windows.Forms.Label();
             this.lblEmbalagem = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtSabor = new System.Windows.Forms.TextBox();
             this.lblSabor = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cmbQtde = new System.Windows.Forms.ComboBox();
+            this.cmbEmbalagem = new System.Windows.Forms.ComboBox();
             this.lblCadastroProduto = new System.Windows.Forms.Label();
             this.dgvProdutos = new System.Windows.Forms.DataGridView();
             this.btnConfirmar = new System.Windows.Forms.Button();
@@ -84,19 +84,19 @@
             this.txtCodProduto.Size = new System.Drawing.Size(100, 20);
             this.txtCodProduto.TabIndex = 3;
             // 
-            // textBox2
+            // txtNome
             // 
-            this.textBox2.Location = new System.Drawing.Point(223, 63);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(387, 20);
-            this.textBox2.TabIndex = 4;
+            this.txtNome.Location = new System.Drawing.Point(223, 63);
+            this.txtNome.Name = "txtNome";
+            this.txtNome.Size = new System.Drawing.Size(387, 20);
+            this.txtNome.TabIndex = 4;
             // 
-            // textBox3
+            // txtPreco
             // 
-            this.textBox3.Location = new System.Drawing.Point(72, 115);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 5;
+            this.txtPreco.Location = new System.Drawing.Point(72, 115);
+            this.txtPreco.Name = "txtPreco";
+            this.txtPreco.Size = new System.Drawing.Size(100, 20);
+            this.txtPreco.TabIndex = 5;
             // 
             // lblQuantidade
             // 
@@ -116,12 +116,12 @@
             this.lblEmbalagem.TabIndex = 8;
             this.lblEmbalagem.Text = "Embalagem";
             // 
-            // textBox5
+            // txtSabor
             // 
-            this.textBox5.Location = new System.Drawing.Point(460, 89);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(150, 20);
-            this.textBox5.TabIndex = 11;
+            this.txtSabor.Location = new System.Drawing.Point(460, 89);
+            this.txtSabor.Name = "txtSabor";
+            this.txtSabor.Size = new System.Drawing.Size(150, 20);
+            this.txtSabor.TabIndex = 11;
             // 
             // lblSabor
             // 
@@ -132,14 +132,15 @@
             this.lblSabor.TabIndex = 10;
             this.lblSabor.Text = "Sabor";
             // 
-            // comboBox1
+            // cmbQtde
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cmbQtde.FormattingEnabled = true;
+            this.cmbQtde.Items.AddRange(new object[] {
             "1",
             "2",
             "3",
-            "45",
+            "4",
+            "5",
             "6",
             "7",
             "8",
@@ -165,24 +166,24 @@
             "28",
             "29",
             "30"});
-            this.comboBox1.Location = new System.Drawing.Point(293, 89);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(120, 21);
-            this.comboBox1.TabIndex = 12;
+            this.cmbQtde.Location = new System.Drawing.Point(293, 89);
+            this.cmbQtde.Name = "cmbQtde";
+            this.cmbQtde.Size = new System.Drawing.Size(120, 21);
+            this.cmbQtde.TabIndex = 12;
             // 
-            // comboBox2
+            // cmbEmbalagem
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.cmbEmbalagem.FormattingEnabled = true;
+            this.cmbEmbalagem.Items.AddRange(new object[] {
             "Pet",
             "Garrafa",
             "Lata",
             "Pacote",
             "Unidade(s)"});
-            this.comboBox2.Location = new System.Drawing.Point(72, 89);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(145, 21);
-            this.comboBox2.TabIndex = 13;
+            this.cmbEmbalagem.Location = new System.Drawing.Point(72, 89);
+            this.cmbEmbalagem.Name = "cmbEmbalagem";
+            this.cmbEmbalagem.Size = new System.Drawing.Size(145, 21);
+            this.cmbEmbalagem.TabIndex = 13;
             // 
             // lblCadastroProduto
             // 
@@ -210,6 +211,7 @@
             this.btnConfirmar.TabIndex = 16;
             this.btnConfirmar.Text = "Confirmar";
             this.btnConfirmar.UseVisualStyleBackColor = true;
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
             // btnCancelar
             // 
@@ -241,6 +243,7 @@
             this.btnNovo.TabIndex = 18;
             this.btnNovo.Text = "Novo";
             this.btnNovo.UseVisualStyleBackColor = false;
+            this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
             // 
             // btnDeletar
             // 
@@ -253,7 +256,7 @@
             this.btnDeletar.Text = "Deletar";
             this.btnDeletar.UseVisualStyleBackColor = false;
             // 
-            // Form1
+            // frmProdutos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -265,20 +268,21 @@
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.dgvProdutos);
             this.Controls.Add(this.lblCadastroProduto);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.cmbEmbalagem);
+            this.Controls.Add(this.cmbQtde);
+            this.Controls.Add(this.txtSabor);
             this.Controls.Add(this.lblSabor);
             this.Controls.Add(this.lblEmbalagem);
             this.Controls.Add(this.lblQuantidade);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtPreco);
+            this.Controls.Add(this.txtNome);
             this.Controls.Add(this.txtCodProduto);
             this.Controls.Add(this.lblNome);
             this.Controls.Add(this.lblPreco);
             this.Controls.Add(this.lblCodProduto);
-            this.Name = "Form1";
+            this.Name = "frmProdutos";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.frmProdutos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdutos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -291,14 +295,14 @@
         private System.Windows.Forms.Label lblPreco;
         private System.Windows.Forms.Label lblNome;
         private System.Windows.Forms.TextBox txtCodProduto;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtNome;
+        private System.Windows.Forms.TextBox txtPreco;
         private System.Windows.Forms.Label lblQuantidade;
         private System.Windows.Forms.Label lblEmbalagem;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtSabor;
         private System.Windows.Forms.Label lblSabor;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cmbQtde;
+        private System.Windows.Forms.ComboBox cmbEmbalagem;
         private System.Windows.Forms.Label lblCadastroProduto;
         private System.Windows.Forms.DataGridView dgvProdutos;
         private System.Windows.Forms.Button btnConfirmar;
