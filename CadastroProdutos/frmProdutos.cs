@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace CadastroProdutos
 
         private void frmProdutos_Load(object sender, EventArgs e)
         {
-            
+            ListarProdutos();
         }
 
         private void btnNovo_Click(object sender, EventArgs e)
@@ -94,6 +95,29 @@ namespace CadastroProdutos
 
         }
 
+        public void ListarProdutos()
+        {
+            string sql = @"SELECT *FROM Produtos";
+            
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.CommandType = CommandType.Text;
+            con.Open();
+            try
+            {
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                DataTable dtListaProd = new DataTable();
+                dataAdapter.Fill(dtListaProd);
+                dgvProdutos.DataSource = dtListaProd;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
 
@@ -105,13 +129,17 @@ namespace CadastroProdutos
             prod.Sabor = txtSabor.Text;
             prod.Preco = double.Parse(txtPreco.Text);
 
-
             if (novo)
             {
                 Salvar(prod);
+                novo = false;
             }
             else
                 Editar(prod);
+
+
+            dgvProdutos.Refresh();
+            ListarProdutos();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -126,15 +154,7 @@ namespace CadastroProdutos
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            Produtos prod = new Produtos();
-            prod.CodProduto = int.Parse(txtCodProduto.Text);
-            prod.Nome = txtNome.Text;
-            prod.Embalagem = cmbEmbalagem.Text;
-            prod.Quantidade = int.Parse(cmbQtde.Text);
-            prod.Sabor = txtSabor.Text;
-            prod.Preco = double.Parse(txtPreco.Text);
-
-            Editar(prod);
+            //
         }
 
         private void dgvProdutos_CellContentClick(object sender, DataGridViewCellEventArgs e)
