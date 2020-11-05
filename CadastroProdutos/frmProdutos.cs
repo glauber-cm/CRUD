@@ -28,6 +28,7 @@ namespace CadastroProdutos
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
+            LimparCampos();
             novo = true;
 
         }
@@ -62,6 +63,10 @@ namespace CadastroProdutos
 
                 MessageBox.Show("Erro: " + ex.ToString());
             }
+            finally
+            {
+                con.Close();
+            }
             
         }
 
@@ -92,7 +97,38 @@ namespace CadastroProdutos
 
                 MessageBox.Show("Erro: " + ex.ToString());
             }
+            finally
+            {
+                con.Close();
+            }
 
+        }
+
+        public void Deletar(Produtos prod)
+        {
+            string sql = @"DELETE FROM Produtos WHERE CODPRODUTO = @CodProduto";
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand(sql,con);
+            cmd.Parameters.AddWithValue("@CodProduto", prod.CodProduto);
+            cmd.CommandType = CommandType.Text;
+            con.Open();
+
+            try
+            {
+                int i = cmd.ExecuteNonQuery();
+                if (i > 0)
+                {
+                    MessageBox.Show("Registro excluído com sucesso!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
         public void ListarProdutos()
@@ -115,6 +151,16 @@ namespace CadastroProdutos
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        public void LimparCampos()
+        {
+            txtCodProduto.Text = string.Empty;
+            txtNome.Text = string.Empty;
+            cmbEmbalagem.Text = string.Empty;
+            cmbQtde.Text = string.Empty;
+            txtSabor.Text = string.Empty;
+            txtPreco.Text = string.Empty;
         }
 
 
@@ -144,12 +190,7 @@ namespace CadastroProdutos
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            txtCodProduto.Text = string.Empty;
-            txtNome.Text = string.Empty;
-            cmbEmbalagem.Text = string.Empty;
-            cmbQtde.Text = string.Empty;
-            txtSabor.Text = string.Empty;
-            txtPreco.Text = string.Empty;
+            LimparCampos();
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
@@ -169,6 +210,13 @@ namespace CadastroProdutos
             txtPreco.Text = Convert.ToString(dgvProdutos["preco",sel].Value);
         }
 
-       
+        private void btnDeletar_Click(object sender, EventArgs e)
+        {
+            Produtos prod = new Produtos();
+            prod.CodProduto = int.Parse(txtCodProduto.Text);
+            Deletar(prod);
+            ListarProdutos();
+
+        }
     }
 }
