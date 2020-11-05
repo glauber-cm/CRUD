@@ -31,61 +31,51 @@ namespace CadastroProdutos
 
         }
 
-        private void btnConfirmar_Click(object sender, EventArgs e)
+        public void Salvar(Produtos prod)
         {
-            if (novo)
-            {
-                string sql = "INSERT INTO PRODUTOS(CODPRODUTO, NOME, PRECO, EMBALAGEM, SABOR, QUANTIDADE)" +
-                    "VALUES(@CodProduto, @Nome, @Preco, @Embalagem, @Sabor, @Quantidade)";
-                SqlConnection con = new SqlConnection(connectionString);
-                SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.Parameters.AddWithValue("@CodProduto", int.Parse(txtCodProduto.Text));
-                cmd.Parameters.AddWithValue("@Nome", txtNome.Text);
-                cmd.Parameters.AddWithValue("@Preco", double.Parse(txtPreco.Text));
-                cmd.Parameters.AddWithValue("@Embalagem", cmbEmbalagem.SelectedItem);
-                cmd.Parameters.AddWithValue("@Sabor", txtSabor.Text );
-                cmd.Parameters.AddWithValue("@Quantidade", cmbQtde.SelectedItem);
-                cmd.CommandType = CommandType.Text;
-                con.Open();
-
-                try
-                {
-                    int i = cmd.ExecuteNonQuery();
-                    if (i > 0)
-                    {
-                        MessageBox.Show("Salvo com Sucesso!!");
-                    }
-                }
-                catch (Exception ex)
-                {
-
-                    MessageBox.Show("Erro: " + ex.ToString());
-                }
-            }
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            txtCodProduto.Text = string.Empty;
-            txtNome.Text = string.Empty;
-            cmbEmbalagem.Text = string.Empty;
-            cmbQtde.Text = string.Empty;
-            txtSabor.Text = string.Empty;
-            txtPreco.Text = string.Empty;
-        }
-
-        private void btnEditar_Click(object sender, EventArgs e)
-        {
-            string sql = @"UPDATE PRODUTOS SET NOME=@Nome, PRECO=@Preco, EMBALAGEM=@Embalagem," +
-                "SABOR=@Sabor, QUANTIDADE=@Quantidade WHERE CODPRODUTO=@CodProduto";
+            string sql = "INSERT INTO PRODUTOS(CODPRODUTO, NOME, PRECO, EMBALAGEM, SABOR, QUANTIDADE)" +
+                  "VALUES(@CodProduto, @Nome, @Preco, @Embalagem, @Sabor, @Quantidade)";
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.Parameters.AddWithValue("@CodProduto", int.Parse(txtCodProduto.Text));
-            cmd.Parameters.AddWithValue("@Nome", txtNome.Text);
-            cmd.Parameters.AddWithValue("@Preco", double.Parse(txtPreco.Text));
-            cmd.Parameters.AddWithValue("@Embalagem", cmbEmbalagem.SelectedItem);
-            cmd.Parameters.AddWithValue("@Sabor", txtSabor.Text);
-            cmd.Parameters.AddWithValue("@Quantidade", cmbQtde.SelectedItem);
+            cmd.Parameters.AddWithValue("@CodProduto", prod.CodProduto);
+            cmd.Parameters.AddWithValue("@Nome", prod.Nome);
+            cmd.Parameters.AddWithValue("@Preco", prod.Preco);
+            cmd.Parameters.AddWithValue("@Embalagem", prod.Embalagem);
+            cmd.Parameters.AddWithValue("@Sabor", prod.Sabor);
+            cmd.Parameters.AddWithValue("@Quantidade", prod.Quantidade);
+            cmd.CommandType = CommandType.Text;
+            con.Open();
+
+            try
+            {
+                int i = cmd.ExecuteNonQuery();
+                
+                if (i > 0)
+                {
+                    MessageBox.Show("Salvo com Sucesso!!");
+                   
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Erro: " + ex.ToString());
+            }
+            
+        }
+
+        public void Editar(Produtos prod)
+        {
+            string sql = @"UPDATE PRODUTOS SET NOME=@Nome, PRECO=@Preco, EMBALAGEM=@Embalagem," +
+                         "SABOR=@Sabor, QUANTIDADE=@Quantidade WHERE CODPRODUTO=@CodProduto";
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.AddWithValue("@CodProduto", prod.CodProduto);
+            cmd.Parameters.AddWithValue("@Nome", prod.Nome);
+            cmd.Parameters.AddWithValue("@Preco", prod.Preco);
+            cmd.Parameters.AddWithValue("@Embalagem", prod.Embalagem);
+            cmd.Parameters.AddWithValue("@Sabor", prod.Sabor);
+            cmd.Parameters.AddWithValue("@Quantidade", prod.Quantidade);
             cmd.CommandType = CommandType.Text;
             con.Open();
             try
@@ -101,6 +91,50 @@ namespace CadastroProdutos
 
                 MessageBox.Show("Erro: " + ex.ToString());
             }
+
+        }
+
+        private void btnConfirmar_Click(object sender, EventArgs e)
+        {
+
+            Produtos prod = new Produtos();
+            prod.CodProduto = int.Parse(txtCodProduto.Text);
+            prod.Nome = txtNome.Text;
+            prod.Embalagem = cmbEmbalagem.Text;
+            prod.Quantidade = int.Parse(cmbQtde.Text);
+            prod.Sabor = txtSabor.Text;
+            prod.Preco = double.Parse(txtPreco.Text);
+
+
+            if (novo)
+            {
+                Salvar(prod);
+            }
+            else
+                Editar(prod);
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            txtCodProduto.Text = string.Empty;
+            txtNome.Text = string.Empty;
+            cmbEmbalagem.Text = string.Empty;
+            cmbQtde.Text = string.Empty;
+            txtSabor.Text = string.Empty;
+            txtPreco.Text = string.Empty;
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            Produtos prod = new Produtos();
+            prod.CodProduto = int.Parse(txtCodProduto.Text);
+            prod.Nome = txtNome.Text;
+            prod.Embalagem = cmbEmbalagem.Text;
+            prod.Quantidade = int.Parse(cmbQtde.Text);
+            prod.Sabor = txtSabor.Text;
+            prod.Preco = double.Parse(txtPreco.Text);
+
+            Editar(prod);
         }
 
         private void dgvProdutos_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -114,5 +148,7 @@ namespace CadastroProdutos
             txtSabor.Text = Convert.ToString(dgvProdutos["sabor",sel].Value);
             txtPreco.Text = Convert.ToString(dgvProdutos["preco",sel].Value);
         }
+
+       
     }
 }

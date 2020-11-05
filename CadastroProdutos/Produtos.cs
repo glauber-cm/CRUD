@@ -1,7 +1,7 @@
 ﻿
 namespace CadastroProdutos
 {
-    class Produtos
+   public class Produtos
     {
         public int CodProduto { get; set; }
         public string Nome { get; set; }
