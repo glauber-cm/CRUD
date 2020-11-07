@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.Common;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CadastroProdutos
@@ -150,7 +143,11 @@ namespace CadastroProdutos
             {
                 MessageBox.Show(ex.Message);
             }
-
+            finally
+            {
+                con.Close();
+            }
+            
         }
 
         public void LimparCampos()
@@ -163,29 +160,57 @@ namespace CadastroProdutos
             txtPreco.Text = string.Empty;
         }
 
+        public bool ValidarCampos()
+        {
+            bool teste;
+
+            if (string.IsNullOrEmpty(txtCodProduto.Text))
+            {
+                MessageBox.Show("Favor inserir o codigo!");
+                teste = false;
+            }
+            else if (string.IsNullOrEmpty(cmbQtde.Text))
+            {
+                MessageBox.Show("Favor inserir a quantidade!");
+                teste = false;
+            }
+            else if (string.IsNullOrEmpty(txtPreco.Text))
+            {
+                MessageBox.Show("Favor inserir o preço!");
+                teste = false;
+            }
+            else
+                teste = true;
+
+            return teste;
+
+        }
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
 
             Produtos prod = new Produtos();
-            prod.CodProduto = int.Parse(txtCodProduto.Text);
-            prod.Nome = txtNome.Text;
-            prod.Embalagem = cmbEmbalagem.Text;
-            prod.Quantidade = int.Parse(cmbQtde.Text);
-            prod.Sabor = txtSabor.Text;
-            prod.Preco = double.Parse(txtPreco.Text);
 
-            if (novo)
+            if (ValidarCampos())
             {
-                Salvar(prod);
-                novo = false;
+                prod.CodProduto = int.Parse(txtCodProduto.Text);
+                prod.Nome = txtNome.Text;
+                prod.Embalagem = cmbEmbalagem.Text;
+                prod.Quantidade = int.Parse(cmbQtde.Text);
+                prod.Sabor = txtSabor.Text;
+                prod.Preco = double.Parse(txtPreco.Text);
+
+                if (novo)
+                {
+                    Salvar(prod);
+                    novo = false;
+                }
+                else
+                    Editar(prod);
+                
+                dgvProdutos.Refresh();
+                ListarProdutos();
             }
-            else
-                Editar(prod);
-
-
-            dgvProdutos.Refresh();
-            ListarProdutos();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
