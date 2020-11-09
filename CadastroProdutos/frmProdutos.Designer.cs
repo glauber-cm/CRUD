@@ -71,7 +71,7 @@
             // lblNome
             // 
             this.lblNome.AutoSize = true;
-            this.lblNome.Location = new System.Drawing.Point(182, 66);
+            this.lblNome.Location = new System.Drawing.Point(185, 66);
             this.lblNome.Name = "lblNome";
             this.lblNome.Size = new System.Drawing.Size(35, 13);
             this.lblNome.TabIndex = 2;
@@ -86,9 +86,9 @@
             // 
             // txtNome
             // 
-            this.txtNome.Location = new System.Drawing.Point(223, 63);
+            this.txtNome.Location = new System.Drawing.Point(226, 63);
             this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(387, 20);
+            this.txtNome.Size = new System.Drawing.Size(360, 20);
             this.txtNome.TabIndex = 4;
             // 
             // txtPreco
@@ -101,11 +101,11 @@
             // lblQuantidade
             // 
             this.lblQuantidade.AutoSize = true;
-            this.lblQuantidade.Location = new System.Drawing.Point(225, 92);
+            this.lblQuantidade.Location = new System.Drawing.Point(190, 92);
             this.lblQuantidade.Name = "lblQuantidade";
-            this.lblQuantidade.Size = new System.Drawing.Size(62, 13);
+            this.lblQuantidade.Size = new System.Drawing.Size(30, 13);
             this.lblQuantidade.TabIndex = 6;
-            this.lblQuantidade.Text = "Quantidade";
+            this.lblQuantidade.Text = "Qtde";
             // 
             // lblEmbalagem
             // 
@@ -118,15 +118,15 @@
             // 
             // txtSabor
             // 
-            this.txtSabor.Location = new System.Drawing.Point(460, 89);
+            this.txtSabor.Location = new System.Drawing.Point(419, 89);
             this.txtSabor.Name = "txtSabor";
-            this.txtSabor.Size = new System.Drawing.Size(150, 20);
+            this.txtSabor.Size = new System.Drawing.Size(167, 20);
             this.txtSabor.TabIndex = 11;
             // 
             // lblSabor
             // 
             this.lblSabor.AutoSize = true;
-            this.lblSabor.Location = new System.Drawing.Point(419, 92);
+            this.lblSabor.Location = new System.Drawing.Point(378, 91);
             this.lblSabor.Name = "lblSabor";
             this.lblSabor.Size = new System.Drawing.Size(35, 13);
             this.lblSabor.TabIndex = 10;
@@ -166,7 +166,7 @@
             "28",
             "29",
             "30"});
-            this.cmbQtde.Location = new System.Drawing.Point(293, 89);
+            this.cmbQtde.Location = new System.Drawing.Point(226, 89);
             this.cmbQtde.Name = "cmbQtde";
             this.cmbQtde.Size = new System.Drawing.Size(120, 21);
             this.cmbQtde.TabIndex = 12;
@@ -179,10 +179,13 @@
             "Garrafa",
             "Lata",
             "Pacote",
-            "Unidade(s)"});
+            "Unidade(s)",
+            "Caixa c/6",
+            "Caixa c/12",
+            "Caixa c/24"});
             this.cmbEmbalagem.Location = new System.Drawing.Point(72, 89);
             this.cmbEmbalagem.Name = "cmbEmbalagem";
-            this.cmbEmbalagem.Size = new System.Drawing.Size(145, 21);
+            this.cmbEmbalagem.Size = new System.Drawing.Size(100, 21);
             this.cmbEmbalagem.TabIndex = 13;
             // 
             // lblCadastroProduto
@@ -238,6 +241,7 @@
             // 
             // btnNovo
             // 
+            this.btnNovo.AccessibleRole = System.Windows.Forms.AccessibleRole.Cursor;
             this.btnNovo.BackColor = System.Drawing.SystemColors.Desktop;
             this.btnNovo.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnNovo.Location = new System.Drawing.Point(373, 388);

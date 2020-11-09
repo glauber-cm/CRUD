@@ -166,7 +166,7 @@ namespace CadastroProdutos
 
             if (string.IsNullOrEmpty(txtCodProduto.Text))
             {
-                MessageBox.Show("Favor inserir o codigo!");
+                MessageBox.Show("Favor inserir o código!");
                 teste = false;
             }
             else if (string.IsNullOrEmpty(cmbQtde.Text))
@@ -220,7 +220,12 @@ namespace CadastroProdutos
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            //
+            if (string.IsNullOrEmpty(txtCodProduto.Text))
+            {
+                MessageBox.Show("Selecione um Produto a ser alterado!");
+            }
+
+            novo = false;
         }
 
         private void dgvProdutos_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -237,10 +242,16 @@ namespace CadastroProdutos
 
         private void btnDeletar_Click(object sender, EventArgs e)
         {
-            Produtos prod = new Produtos();
-            prod.CodProduto = int.Parse(txtCodProduto.Text);
-            Deletar(prod);
-            ListarProdutos();
+            if (!string.IsNullOrEmpty(txtCodProduto.Text))
+            {
+                Produtos prod = new Produtos();
+                prod.CodProduto = int.Parse(txtCodProduto.Text);
+                Deletar(prod);
+                LimparCampos();
+                ListarProdutos();
+            }
+            else
+                MessageBox.Show("Selecione um produto a ser excluído!");
 
         }
     }
